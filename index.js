@@ -18,3 +18,14 @@ function nodeAt(index, linkedList, collection) {
   }
   return node
 }
+
+function addressAt(index, linkedList, collection) {
+  let address
+  if (index === 0) {
+    address = linkedList
+  } else {
+    let node = nodeAt(index-1, linkedList, collection)
+    address = node["next"]
+  }
+  return address
+}
