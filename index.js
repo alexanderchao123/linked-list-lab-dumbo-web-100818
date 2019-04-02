@@ -29,3 +29,38 @@ function addressAt(index, linkedList, collection) {
   }
   return address
 }
+
+function indexAt(node, collection, linkedList) {
+  let collectionLength = Object.keys(collection).length
+  let currentNode = collection[linkedList]
+  for(let i = 0; i < collectionLength; i++) {
+    if (node === currentNode) {
+      return i
+    } else {
+      currentNode = next(currentNode, collection)
+    }
+  }
+}
+
+function findUnassignedNode(linkedList, collection) {
+  for (var key in collection) {
+    let node = collection[key]
+    if (node["next"] === "") return node
+  }
+}
+
+function insertNodeAt(index, address, linkedList, collection) {
+  let node = collection[linkedList]
+  for(let i = 0; i < index; i++) {
+    node = nodeAt(index - 1, linkedList, collection)
+    let unassignedNode = findUnassignedNode(linkedList, collection)
+    unassignedNode["next"] = node["next"]
+    node["next"] = address
+  }
+}
+
+function deleteNodeAt(index, linkedList, collection) {
+  let previousNode = nodeAt(index - 1, linkedList, collection)
+  let currentNode = nodeAt(index, linkedList, collection)
+  previousNode["next"] = currentNode["next"]
+}
